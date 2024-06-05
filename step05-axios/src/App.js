@@ -37,9 +37,10 @@ function App() {
   ////////////////spring Boot///////////////
   const insertUser = () => {
     axios({
-      url: "http://localhost:9000/a",
-      method: "get",
-      //data :
+      //url: "http://localhost:9000/a",
+      url: " http://localhost:9000/user",
+      method: "post",
+      data: { name: "Jung", email: "hh@gmail.com", age: 25 },
     })
       .then((result) => {
         console.log(result);
@@ -48,10 +49,63 @@ function App() {
         console.log(err);
       });
   };
-  const deleteUser = () => {};
-  const putUser = () => {};
-  const getById = () => {};
-  const getUsers = () => {};
+
+  //삭제
+  const deleteUser = () => {
+    axios({
+      url: " http://localhost:9000/user/3",
+      method: "delete",
+    })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.title + " | " + err.response.data.detail);
+      });
+  };
+
+  //수정
+  const putUser = () => {
+    axios({
+      url: " http://localhost:9000/user/2",
+      method: "put",
+      data: { name: "gaHyun", email: "gaHyun@gmail.com", age: 25 },
+    })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getById = () => {
+    axios({
+      url: " http://localhost:9000/user/5",
+      method: "get",
+    })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getUsers = () => {
+    axios({
+      url: " http://localhost:9000/user",
+      method: "get",
+      //data: { name: "Jung", email: "hh@gmail.com", age: 25 },
+    })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
