@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button, InputGroup } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const JoinForm = () => {
   //
@@ -52,8 +54,31 @@ const JoinForm = () => {
     }
   };
 
+  const navigator = useNavigate();
+
   //가입하기
-  const submitJoin = () => {};
+  const submitJoin = (e)=>{
+      axios({
+      method:"POST",
+      url : "http://localhost:9000/members",
+      data : member,
+      })
+      .then((res)=>{
+      console.log(res);
+       navigator("/")
+      })
+      .catch((err)=>{
+        console.log(err)
+        let errMessage = err.response.data.type +"\n";
+        errMessage += err.response.data.title +"\n";
+        errMessage += err.response.data.detail +"\n";
+        errMessage += err.response.data.status +"\n";
+        errMessage += err.response.data.instance +"\n";
+        errMessage += err.response.data.timestamp;
+        alert(errMessage);
+      }); 
+  };
+
   return (
     <>
       <h2 style={{ padding: "20px", color: "red" }}>회원가입</h2>
