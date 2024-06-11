@@ -15,7 +15,7 @@ const Home = () => {
         },
       })
       .then((res) => {
-        setBoards(res.data);
+        setBoards(res.data); //state에서 관리되는 변수가 변경되어 update(re-redering)
       })
       .catch((err) => {
         let errMessage = err.response.data.type + "\n";
